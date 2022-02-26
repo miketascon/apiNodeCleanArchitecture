@@ -5,6 +5,6 @@ module.exports = {
         password: "postgres",
         database: "school_qa",
         host: "localhost",
-        dialest: "postgres",
+        dialect: "postgres",
     }
 }

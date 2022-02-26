@@ -5,6 +5,9 @@ const { UserController } = require('./controllers');
 const Routes = require('./routes');
 const config = require('../config/enviroments');
 const UserRoutes = require('./routes/user.routes');
+const { UserService } = require('../services');
+const { UserRepositorty } = require('../dal/repositories');
+const db = require('../dal/entities');
 
 const container = createContainer();
 
@@ -12,20 +15,20 @@ const container = createContainer();
 container.register({
     app: asClass(StartUp).singleton(),
     server: asClass(Server).singleton(),
-})
-.register({
-  UserController: asClass(UserController).singleton(),  
-})
-.register({
+}).register({
+    UserController: asClass(UserController).singleton(),
+}).register({
     router: asFunction(Routes).singleton(),
-})
-.register({
     config: asValue(config),
-})
-.register({
+}).register({
+    db: asValue(db)
+}).register({
     UserRoutes: asFunction(UserRoutes).singleton(),
-})
+}).register({
+    UserService: asClass(UserService).singleton(),
+}).register({
+    UserRepositorty: asClass(UserRepositorty).singleton(),
+});
 
 
 module.exports = container;
-
